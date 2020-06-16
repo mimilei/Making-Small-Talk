@@ -5,6 +5,35 @@
     <title></title>
   </head>
   <body>
-
+    <h1>Text to Speech</h1>
+    <textarea id="userinput"></textarea>
+    <button id="clickbutton" onclick="customSpeak()"> Click to start talking</button>
   </body>
+  <script type="text/javascript">
+    var voice = new SpeechSynthesisUtterance(); // refers to an individual voice in a crowd
+
+    voice.volume = 1;
+    voice.rate = 1;
+
+    function customSpeak() {
+      var userinput = document.getElementById("userinput").value;
+      console.log(userinput);
+      voice.text = userinput;
+      speechSynthesis.speak(voice);
+    }
+
+    var messages = ['tea', 'chocolate', "milk tea", 'hot cider on a winter night'];
+
+    function userStart() {
+      // Executed when we say start talking
+      voice.text = "100% chocolate is bitter, like my life.";
+      for (var i=0; i < 4; i++) {
+        var messageIndex = Math.floor(Math.random() * messages.length);
+        // voice.pitch += 1;
+        // voice.rate += 1;
+        voice.text = messages[messageIndex]
+        speechSynthesis.speak(voice); // speechSynthesis is automatically defined in chrome
+      }
+    }
+  </script>
 </html>
